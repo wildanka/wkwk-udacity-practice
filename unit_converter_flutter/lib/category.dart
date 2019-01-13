@@ -9,6 +9,10 @@ import 'package:flutter/material.dart';
 // @required is defined in the meta.dart package
 import 'package:meta/meta.dart';
 
+// converter screen
+import 'package:unit_converter_flutter/converter_screen.dart';
+import 'package:unit_converter_flutter/unit.dart';
+
 // Use an underscore to define const
 final _rowHeight = 100.0;
 final _borderRadius = BorderRadius.circular(
@@ -22,6 +26,8 @@ class Category extends StatelessWidget {
   final String name;
   final ColorSwatch color;
   final IconData iconLocation;
+  final List<Unit> units;
+
 
   /// Creates a [Category].
   ///
@@ -36,11 +42,36 @@ class Category extends StatelessWidget {
     Key key,
     @required this.name,
     @required this.color,
-    @required this.iconLocation})
+    @required this.iconLocation,
+    @required this.units})
       : assert (name != null),
         assert (color != null),
         assert (iconLocation != null),
+        assert (units != null),
         super(key: key);
+
+  /// Navigates to the [ConverterScreen].
+  void _navigateToConverterScreen(BuildContext context) {
+    Navigator.of(context).push(
+        MaterialPageRoute<Null>(builder: (BuildContext context) {
+          return Scaffold(
+            appBar: AppBar(
+              elevation: 1.0,
+              title: Text(
+                name,
+                style: Theme.of(context).textTheme.display1,
+              ),
+              centerTitle: true,
+              backgroundColor: color,
+            ),
+            body: ConverterScreen(
+              screenName: name,
+              screenColor: color,
+              units: units,
+            ),
+          );
+        }));
+  }
 
   /// Builds a custom widget that shows [Category] information.
   ///
@@ -61,7 +92,9 @@ class Category extends StatelessWidget {
           highlightColor: color,
           splashColor: color,
           // we can user () => function() or the () {function();} syntax
+          // TODO: Update this onTap property to call _navigateToConverter()
           onTap: () {
+            _navigateToConverterScreen(context);
 //            print("Stop it, it's tickle!");
           },
           child: Padding(

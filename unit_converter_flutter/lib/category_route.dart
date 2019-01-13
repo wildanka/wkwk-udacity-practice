@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 /// since we are going to make the list of category, of course we need to import it's class
 import 'package:unit_converter_flutter/category.dart';
+import 'package:unit_converter_flutter/unit.dart';
+
 
 final _backgroundColor = Colors.blue[100];
 
@@ -47,25 +49,37 @@ class CategoryRoute extends StatelessWidget {
     );
   }
 
+  /// Returns a list of mock [Unit]s.
+  List<Unit> _retrieveUnitList(String categoryName) {
+    return List.generate(10, (int i) {
+      i += 1;
+      return Unit(
+        name: '$categoryName Unit $i',
+        conversion: i.toDouble(),
+      );
+    });
+  }
+
   ///main method of this class
   @override
   Widget build(BuildContext context) {
     final categories = <Category>[];
 
     for (var i = 0; i < _categoryNames.length; i++) {
-      categories.add(Category(name: _categoryNames[i],
+      categories.add(Category(
+          name: _categoryNames[i],
           color: _baseColors[i],
-          iconLocation: Icons.cake));
+          iconLocation: Icons.cake,
+          units: _retrieveUnitList(_categoryNames[i])));
     }
 
     //create the listview container
     final listView = Container(
         color: _backgroundColor,
         padding: EdgeInsets.symmetric(horizontal: 8.0),
-        child : _buildCategoryWidgets(categories)
-    );
+        child: _buildCategoryWidgets(categories));
 
-    //create the appbar
+    //create the listview container
     final appBar = AppBar(
       elevation: 0.0,
       title: Text(
@@ -78,7 +92,6 @@ class CategoryRoute extends StatelessWidget {
       centerTitle: true,
       backgroundColor: _backgroundColor,
     );
-
 
     //return the Scaffold
     return Scaffold(
