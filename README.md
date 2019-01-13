@@ -8,3 +8,4 @@ What I Have Learned :
 3. Create our First Rectangle Container using StatelesWidget (https://github.com/wildanka/hello_rectangle/commits/master)
 4. Create Some Child Widgets  (inside our First Rectangle Container using StatelesWidget (https://github.com/wildanka/hello_rectangle/commits/master)
 5. Learned to Create a Custom Widget and Implement it in Our StatelesWidget
+6. Learned to Create a Custom Static ListView

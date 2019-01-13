@@ -31,6 +31,7 @@ class Category extends StatelessWidget {
   /// as we are going to need the name, color, and iconLocation from main.dart
   /// we need to use @required to checks for a named parameter passed in,
   /// @required != null checking, to do null checking we will assert it later
+  // We can say that this const Category is a constructor
   const Category({
     Key key,
     @required this.name,
@@ -61,7 +62,7 @@ class Category extends StatelessWidget {
           splashColor: color,
           // we can user () => function() or the () {function();} syntax
           onTap: () {
-            print("Stop it, it's tickle!");
+//            print("Stop it, it's tickle!");
           },
           child: Padding(
             padding: EdgeInsets.all(8.0),
