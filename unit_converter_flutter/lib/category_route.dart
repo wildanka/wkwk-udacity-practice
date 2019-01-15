@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:unit_converter_flutter/category.dart';
 import 'package:unit_converter_flutter/unit.dart';
 
-
 final _backgroundColor = Colors.blue[100];
 
 /// Category Route (screen)
@@ -14,8 +13,15 @@ final _backgroundColor = Colors.blue[100];
 /// While its named CategoryRoute, a more apt name would be CategoryScreen.
 /// because it's responsible for the Ui at the route destination
 
-class CategoryRoute extends StatelessWidget {
+class CategoryRoute extends StatefulWidget {
   const CategoryRoute();
+
+  @override
+  _CategoryRouteState createState() => _CategoryRouteState();
+}
+
+class _CategoryRouteState extends State<CategoryRoute>{
+  final _categories = <CategoryRoute>[];
 
   static const _categoryNames = <String>[
     'Length',
@@ -63,6 +69,12 @@ class CategoryRoute extends StatelessWidget {
   ///main method of this class
   @override
   Widget build(BuildContext context) {
+    // TODO: Instead of re-creating a list of Categories in every build(),
+    // save this as a variable inside the State object and create
+    // the list at initialization (in initState()).
+    // This way, you also don't have to pass in the list of categories to
+    // _buildCategoryWidgets()
+
     final categories = <Category>[];
 
     for (var i = 0; i < _categoryNames.length; i++) {
